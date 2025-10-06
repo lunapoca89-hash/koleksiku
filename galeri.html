@@ -3,236 +3,154 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Luna Poca - Links</title>
+<title>Luna Poca - Galeri</title>
 <style>
+/* ======== Gaya dasar dari index ======== */
 * {margin:0;padding:0;box-sizing:border-box;}
 body {
   font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
   background:linear-gradient(135deg,#0f0f23 0%,#1a1a2e 50%,#16213e 100%);
-  min-height:100vh;display:flex;justify-content:center;align-items:center;
-  padding:20px;position:relative;overflow-x:hidden;
+  min-height:100vh;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  padding:20px;
+  overflow:hidden;
+  position:relative;
 }
-body::before,body::after{content:'';position:absolute;border-radius:50%;}
+
+/* efek blob lembut di background */
+body::before,body::after {
+  content:'';
+  position:absolute;
+  border-radius:50%;
+  animation:float 18s infinite;
+  opacity:0.7;
+}
 body::before {
   width:400px;height:400px;
   background:radial-gradient(circle,rgba(255,105,180,0.15) 0%,transparent 70%);
-  top:-150px;left:-150px;animation:float 18s infinite;
+  top:-150px;left:-150px;
 }
 body::after {
   width:300px;height:300px;
   background:radial-gradient(circle,rgba(138,43,226,0.15) 0%,transparent 70%);
-  bottom:-120px;right:-120px;animation:float 14s infinite reverse;
+  bottom:-120px;right:-120px;
+  animation-direction:reverse;
 }
 @keyframes float {
   0%,100%{transform:translate(0,0);}
   50%{transform:translate(30px,-30px);}
 }
+
+/* ======== Card utama ======== */
 .container {
-  max-width:680px;width:100%;
+  max-width:600px;width:100%;
   background:rgba(26,26,46,0.85);
   backdrop-filter:blur(15px);
   border-radius:30px;
-  padding:40px 30px;
+  padding:50px 30px;
+  text-align:center;
+  color:#fff;
   box-shadow:0 20px 60px rgba(0,0,0,0.5);
   border:1px solid rgba(255,105,180,0.2);
   position:relative;z-index:1;
 }
 
-.photocard-container {
-  position:relative;
-  width:100%;
-  aspect-ratio:16/9;
-  overflow:hidden;
-  border-radius:20px;
-  margin-bottom:35px;
-  box-shadow:0 8px 30px rgba(255,105,180,0.25);
-  background:rgba(0,0,0,0.3);
-  pointer-events:none;
-}
-.photocard-track {
+/* ======== Animasi ikon ======== */
+.icon-wrapper {
   display:flex;
+  justify-content:center;
   align-items:center;
-  height:100%;
-  padding:0;
-  position:absolute;
-  left:0;
-  width:max-content;
-  will-change:transform;
-  backface-visibility:hidden;
-  /* Animasi scroll berjalan terus menerus */
-  animation: scrollRight 40s linear infinite;
+  margin-bottom:30px;
+}
+.gear {
+  width:80px;height:80px;
+  fill:#ff69b4;
+  filter:drop-shadow(0 0 20px rgba(255,105,180,0.5));
+  animation:spin 4s linear infinite;
+}
+@keyframes spin {
+  from {transform:rotate(0deg);}
+  to {transform:rotate(360deg);}
 }
 
-.photocard-item {
-  position: relative;
-  height: 85%;
-  aspect-ratio: 2/3;
-  border-radius: 16px;
-  flex-shrink: 0;
-  margin-right: 20px;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
-  overflow: hidden;
+/* ======== Teks ======== */
+h1 {
+  font-size:32px;
+  font-weight:700;
+  margin-bottom:15px;
+  text-shadow:0 0 20px rgba(255,105,180,0.4);
 }
-.photocard-item img {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: opacity 0.8s ease-in-out;
-}
-.photocard-item img.back {
-  opacity: 0;
-}
-.photocard-item.is-flipped img.front {
-  opacity: 0;
-}
-.photocard-item.is-flipped img.back {
-  opacity: 1;
+p {
+  color:#ffc0e0;
+  font-size:20px;
+  line-height:1.6;
 }
 
-@keyframes scrollRight {
-  0% { transform: translate3d(0,0,0); }
-  100% { transform: translate3d(-50%,0,0); }
-}
-
-.profile { text-align:center;margin-bottom:40px; }
-.profile h1 { font-size:36px;color:#fff;margin-bottom:15px;font-weight:700;text-shadow:0 0 20px rgba(255,105,180,0.5); }
-.profile p {color:#ffc0e0;font-size:16px;}
-.links { display:flex;flex-direction:column;gap:18px; }
-.link-item{position:relative;overflow:hidden;}
-.link-btn {
-  display:flex;align-items:center;justify-content:center;gap:15px;padding:17px 30px;
-  background:rgba(30,30,50,0.8);border:2px solid rgba(255,105,180,0.3);border-radius:16px;
-  text-decoration:none;color:#fff;font-size:18px;font-weight:600;transition:all 0.3s ease;
+/* ======== Tombol kembali ======== */
+.back-btn {
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+  gap:10px;
+  margin-top:40px;
+  padding:14px 28px;
+  background:rgba(30,30,50,0.8);
+  border:2px solid rgba(255,105,180,0.4);
+  border-radius:16px;
+  color:#fff;
+  text-decoration:none;
+  font-weight:600;
+  font-size:18px;
+  transition:all 0.3s ease;
   position:relative;overflow:hidden;
 }
-.link-btn::before {
+.back-btn::before {
   content:'';position:absolute;top:0;left:0;width:0;height:100%;
   background:linear-gradient(135deg,rgba(255,105,180,0.3),rgba(138,43,226,0.3));
   transition:width .4s ease;z-index:-1;border-radius:14px;
 }
-.link-btn:hover::before {width:100%;}
-.link-btn:hover {transform:translateY(-3px);box-shadow:0 8px 30px rgba(255,105,180,0.4);border-color:rgba(255,105,180,0.6);}
-.link-icon {width:32px;height:32px;transition:transform .3s ease;}
-.link-btn:hover .link-icon {transform:scale(1.15) rotate(5deg);}
-.discord{background:linear-gradient(135deg,rgba(88,101,242,0.2),rgba(71,82,196,0.2));border-color:rgba(88,101,242,0.4);}
-.twitter{background:linear-gradient(135deg,rgba(29,161,242,0.2),rgba(13,139,217,0.2));border-color:rgba(29,161,242,0.4);}
-.ai-bot1{background:linear-gradient(135deg,rgba(255,107,107,0.2),rgba(238,90,82,0.2));border-color:rgba(255,107,107,0.4);}
-.ai-bot2{background:linear-gradient(135deg,rgba(78,205,196,0.2),rgba(68,160,141,0.2));border-color:rgba(78,205,196,0.4);}
-.link-dosa{background:linear-gradient(135deg,rgba(255,69,0,0.2),rgba(255,140,0,0.2));border-color:rgba(255,69,0,0.4);}
-.link-dosa:hover{box-shadow:0 8px 30px rgba(255,69,0,0.5);}
-.footer{text-align:center;margin-top:40px;color:#7a7a9d;font-size:14px;}
-.hearts{position:fixed;pointer-events:none;width:30px;height:30px;color:#ff69b4;font-size:24px;opacity:0;animation:float-up 3s ease-out;z-index:9999;}
-@keyframes float-up{0%{opacity:1;transform:translateY(0) scale(1);}100%{opacity:0;transform:translateY(-100px) scale(1.5);}}
+.back-btn:hover::before {width:100%;}
+.back-btn:hover {
+  transform:translateY(-3px);
+  box-shadow:0 8px 30px rgba(255,105,180,0.4);
+  border-color:rgba(255,105,180,0.6);
+}
+.back-icon {
+  width:26px;height:26px;
+  transition:transform .3s ease;
+}
+.back-btn:hover .back-icon {
+  transform:translateX(-4px);
+}
 
+/* responsif */
 @media(max-width:600px){
-  .container{padding:30px 20px;}
-  .profile h1{font-size:28px;}
-  .link-btn{font-size:16px;padding:14px 22px;}
-  .photocard-item {margin-right:15px;}
+  .container{padding:40px 25px;}
+  h1{font-size:26px;}
+  p{font-size:16px;}
 }
 </style>
 </head>
 <body>
   <div class="container">
-    <div class="photocard-container">
-      <div class="photocard-track">
-        <div class="photocard-item" data-index="0">
-          <img src="freya.jpg" class="front" alt="Freya">
-          <img src="freyas.jpg" class="back" alt="Freya Alt">
-        </div>
-        <div class="photocard-item" data-index="1">
-          <img src="michie.jpg" class="front" alt="Michie">
-          <img src="michies.jpg" class="back" alt="Michie Alt">
-        </div>
-        <div class="photocard-item" data-index="2">
-          <img src="zee.jpg" class="front" alt="Zee">
-          <img src="zees.jpg" class="back" alt="Zee Alt">
-        </div>
-        <div class="photocard-item" data-index="3">
-          <img src="nadine.jpg" class="front" alt="Nadine">
-          <img src="nadines.jpg" class="back" alt="Nadine Alt">
-        </div>
-        <div class="photocard-item" data-index="4">
-          <img src="cristi.jpg" class="front" alt="Cristi">
-          <img src="cristis.jpg" class="back" alt="Cristi Alt">
-        </div>
-      </div>
+    <div class="icon-wrapper">
+      <!-- Ikon gear animasi -->
+      <svg class="gear" viewBox="0 0 512 512">
+        <path d="M487.4 315.7l-42.7-24.6c2.2-12.5 3.3-25.3 3.3-38.1s-1.1-25.6-3.3-38.1l42.7-24.6c6.6-3.8 9.7-11.6 7.4-19l-18.9-58.3c-2.3-7.3-9.1-12.1-16.7-12.1-1.3 0-2.7.1-4 .4l-50.3 12c-9.9-8-20.3-15.2-31.2-21.4l-7.6-52c-1.2-8.2-8.2-14.3-16.5-14.3h-60.9c-8.3 0-15.3 6.1-16.5 14.3l-7.6 52c-10.9 6.2-21.3 13.4-31.2 21.4l-50.3-12c-1.3-.3-2.7-.4-4-.4-7.6 0-14.4 4.8-16.7 12.1l-18.9 58.3c-2.3 7.4.8 15.2 7.4 19l42.7 24.6c-2.2 12.5-3.3 25.3-3.3 38.1s1.1 25.6 3.3 38.1l-42.7 24.6c-6.6 3.8-9.7 11.6-7.4 19l18.9 58.3c2.3 7.3 9.1 12.1 16.7 12.1 1.3 0 2.7-.1 4-.4l50.3-12c9.9 8 20.3 15.2 31.2 21.4l7.6 52c1.2 8.2 8.2 14.3 16.5 14.3h60.9c8.3 0 15.3-6.1 16.5-14.3l7.6-52c10.9-6.2 21.3-13.4 31.2-21.4l50.3 12c1.3.3 2.7.4 4 .4 7.6 0 14.4-4.8 16.7-12.1l18.9-58.3c2.3-7.4-.8-15.2-7.4-19zM256 334c-43.1 0-78-34.9-78-78s34.9-78 78-78 78 34.9 78 78-34.9 78-78 78z"/>
+      </svg>
     </div>
+    <h1>Website Sedang Dalam Proses 🔧</h1>
+    <p>Kalo udah sange push up dulu aja!<br>
+        Lagi di kelarin, nanti balik lagi kemari.</p>
 
-    <div class="profile">
-      <h1>Luna Poca</h1>
-      <p>Temukan Semua Link Koleksiku di Sini!</p>
-    </div>
-
-    <div class="links">
-        <div class="link-item">
-          <a href="galeri.html" target="_blank" class="link-btn link-dosa"><svg class="link-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"/><path d="M12 14.5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z" opacity="0.6"/></svg><span>Arsip Kumpulan Dosa</span></a>
-        </div>
-        <div class="link-item">
-          <a href="https://discord.gg/x7XCsHnH" target="_blank" class="link-btn discord"><svg class="link-icon" viewBox="0 0 127.14 96.36" fill="currentColor"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg><span>Join Discord Community</span></a>
-        </div>
-        <div class="link-item">
-          <a href="https://x.com/pejuhhhin?t=SjuJEosEhNuaIVrRUtII1g&s=09" target="_blank" class="link-btn twitter"><svg class="link-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg><span>Follow Twitter/X</span></a>
-        </div>
-        <div class="link-item">
-          <a href="https://t.co/ugiVsDecMA" target="_blank" class="link-btn ai-bot1"><svg class="link-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5zm0 3.18l7 3.5v6.32c0 4.28-2.96 8.31-7 9.42-4.04-1.11-7-5.14-7-9.42V8.68l7-3.5z"/><path d="M9.5 14.5l-2-2L6 14l3.5 3.5L17 10l-1.5-1.5z" opacity="0.6"/><circle cx="12" cy="12" r="2.5" opacity="0.3"/></svg><span>Free A.I Bot (Link 1)</span></a>
-        </div>
-        <div class="link-item">
-          <a href="https://t.co/8cVxpJltdy" target="_blank" class="link-btn ai-bot2"><svg class="link-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/><path d="M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z" opacity="0.6"/><circle cx="12" cy="12" r="2" opacity="0.4"/><path d="M12 8v4l3 1.5" opacity="0.5"/></svg><span>Free A.I Bot (Link 2)</span></a>
-        </div>
-    </div>
-      
-    <div class="footer">
-      <p>© 2025 Luna Poca. All rights reserved.</p>
-    </div>
+    <a href="index.html" class="back-btn">
+      <svg class="back-icon" viewBox="0 0 24 24" fill="currentColor">
+        <path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/>
+      </svg>
+      Kembali ke Beranda
+    </a>
   </div>
-
-<script>
-/* 💖 Efek hearts klik */
-document.querySelectorAll('.link-btn').forEach(btn=>{
-  btn.addEventListener('click',e=>{
-    const heart=document.createElement('div');
-    heart.className='hearts';
-    heart.textContent='💖';
-    heart.style.left=e.clientX+'px';
-    heart.style.top=e.clientY+'px';
-    document.body.appendChild(heart);
-    setTimeout(()=>heart.remove(),3000);
-  });
-});
-
-/* ✅ LOGIKA BARU: Pergantian Simultan (Bersamaan) */
-(function initSimultaneousSwitcher() {
-    const track = document.querySelector('.photocard-track');
-    if (!track) return;
-
-    // Duplikasi item untuk scroll yang mulus
-    track.innerHTML += track.innerHTML;
-
-    const allItems = track.querySelectorAll('.photocard-item');
-
-    // 🕒 Tunggu 2 detik dulu sebelum pergantian pertama
-    setTimeout(() => {
-        // 🔄 Lakukan pergantian pertama
-        allItems.forEach(item => item.classList.add('is-flipped'));
-        setTimeout(() => {
-            allItems.forEach(item => item.classList.remove('is-flipped'));
-        }, 2500);
-
-        // ⏱️ Setelah itu lanjut ke interval rutin tiap 5 detik
-        setInterval(() => {
-            allItems.forEach(item => item.classList.add('is-flipped'));
-            setTimeout(() => {
-                allItems.forEach(item => item.classList.remove('is-flipped'));
-            }, 2500);
-        }, 5000);
-    }, 2000); // ⬅️ Delay awal 2 detik sebelum mulai
-})();
-
-
-</script>
 </body>
 </html>
