@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Luna Poca - Links</title>
 <style>
-/* ======== gaya asli tetap ======== */
 * {margin:0;padding:0;box-sizing:border-box;}
 body {
   font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;
@@ -39,7 +38,6 @@ body::after {
   position:relative;z-index:1;
 }
 
-/* ✅ Photocard 16:9, isi foto potrait 2:3, auto-scroll halus tanpa berhenti */
 .photocard-container {
   position:relative;
   width:100%;
@@ -50,124 +48,117 @@ body::after {
   box-shadow:0 8px 30px rgba(255,105,180,0.25);
   background:rgba(0,0,0,0.3);
   pointer-events:none;
-  touch-action:none;
-  -webkit-user-drag:none;
-  user-select:none;
 }
 .photocard-track {
   display:flex;
   align-items:center;
   height:100%;
-  gap:0;
   padding:0;
   position:absolute;
   left:0;
   width:max-content;
-  animation:scrollRight 25s linear infinite;
-  animation-play-state:paused;
   will-change:transform;
-  transform:translate3d(0,0,0);
   backface-visibility:hidden;
-}
-.photocard-track img {
-  height:85%;
-  aspect-ratio:2/3;
-  object-fit:cover;
-  border-radius:16px;
-  flex-shrink:0;
-  margin-right:20px;
-  box-shadow:0 6px 20px rgba(0,0,0,0.4);
-  pointer-events:none;
-  user-select:none;
-  -webkit-user-drag:none;
+  /* Animasi scroll berjalan terus menerus */
+  animation: scrollRight 40s linear infinite;
 }
 
-/* 🔁 Scroll otomatis halus, loop mulus */
+.photocard-item {
+  position: relative;
+  height: 85%;
+  aspect-ratio: 2/3;
+  border-radius: 16px;
+  flex-shrink: 0;
+  margin-right: 20px;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+  overflow: hidden;
+}
+.photocard-item img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity 0.8s ease-in-out;
+}
+.photocard-item img.back {
+  opacity: 0;
+}
+.photocard-item.is-flipped img.front {
+  opacity: 0;
+}
+.photocard-item.is-flipped img.back {
+  opacity: 1;
+}
+
 @keyframes scrollRight {
   0% { transform: translate3d(0,0,0); }
   100% { transform: translate3d(-50%,0,0); }
 }
 
-.profile {
-  text-align:center;margin-bottom:40px;
-}
-.profile h1 {
-  font-size:36px;color:#fff;margin-bottom:15px;
-  font-weight:700;
-  text-shadow:0 0 20px rgba(255,105,180,0.5);
-}
+.profile { text-align:center;margin-bottom:40px; }
+.profile h1 { font-size:36px;color:#fff;margin-bottom:15px;font-weight:700;text-shadow:0 0 20px rgba(255,105,180,0.5); }
 .profile p {color:#ffc0e0;font-size:16px;}
-.links {
-  display:flex;flex-direction:column;gap:18px;
-}
+.links { display:flex;flex-direction:column;gap:18px; }
 .link-item{position:relative;overflow:hidden;}
-
-/* 🔧 MODIFIKASI: Tinggi tombol dikurangi ~12% (dari 20px jadi 17px padding vertical) */
 .link-btn {
-  display:flex;align-items:center;justify-content:center;
-  gap:15px;padding:17px 30px; /* ← DIKURANGI dari 20px ke 17px */
-  background:rgba(30,30,50,0.8);
-  border:2px solid rgba(255,105,180,0.3);
-  border-radius:16px;
-  text-decoration:none;color:#fff;
-  font-size:18px;font-weight:600;
-  transition:all 0.3s ease;
+  display:flex;align-items:center;justify-content:center;gap:15px;padding:17px 30px;
+  background:rgba(30,30,50,0.8);border:2px solid rgba(255,105,180,0.3);border-radius:16px;
+  text-decoration:none;color:#fff;font-size:18px;font-weight:600;transition:all 0.3s ease;
   position:relative;overflow:hidden;
 }
-
 .link-btn::before {
   content:'';position:absolute;top:0;left:0;width:0;height:100%;
   background:linear-gradient(135deg,rgba(255,105,180,0.3),rgba(138,43,226,0.3));
   transition:width .4s ease;z-index:-1;border-radius:14px;
 }
 .link-btn:hover::before {width:100%;}
-.link-btn:hover {
-  transform:translateY(-3px);
-  box-shadow:0 8px 30px rgba(255,105,180,0.4);
-  border-color:rgba(255,105,180,0.6);
-}
+.link-btn:hover {transform:translateY(-3px);box-shadow:0 8px 30px rgba(255,105,180,0.4);border-color:rgba(255,105,180,0.6);}
 .link-icon {width:32px;height:32px;transition:transform .3s ease;}
 .link-btn:hover .link-icon {transform:scale(1.15) rotate(5deg);}
 .discord{background:linear-gradient(135deg,rgba(88,101,242,0.2),rgba(71,82,196,0.2));border-color:rgba(88,101,242,0.4);}
-.discord:hover{box-shadow:0 8px 30px rgba(88,101,242,0.5);}
 .twitter{background:linear-gradient(135deg,rgba(29,161,242,0.2),rgba(13,139,217,0.2));border-color:rgba(29,161,242,0.4);}
-.twitter:hover{box-shadow:0 8px 30px rgba(29,161,242,0.5);}
 .ai-bot1{background:linear-gradient(135deg,rgba(255,107,107,0.2),rgba(238,90,82,0.2));border-color:rgba(255,107,107,0.4);}
 .ai-bot2{background:linear-gradient(135deg,rgba(78,205,196,0.2),rgba(68,160,141,0.2));border-color:rgba(78,205,196,0.4);}
-
-/* 🔥 TAMBAHAN: Gaya untuk tombol "Link Dosa" dengan tema api/flame */
-.link-dosa{
-  background:linear-gradient(135deg,rgba(255,69,0,0.2),rgba(255,140,0,0.2));
-  border-color:rgba(255,69,0,0.4);
-}
-.link-dosa:hover{
-  box-shadow:0 8px 30px rgba(255,69,0,0.5);
-}
-
+.link-dosa{background:linear-gradient(135deg,rgba(255,69,0,0.2),rgba(255,140,0,0.2));border-color:rgba(255,69,0,0.4);}
+.link-dosa:hover{box-shadow:0 8px 30px rgba(255,69,0,0.5);}
 .footer{text-align:center;margin-top:40px;color:#7a7a9d;font-size:14px;}
 .hearts{position:fixed;pointer-events:none;width:30px;height:30px;color:#ff69b4;font-size:24px;opacity:0;animation:float-up 3s ease-out;z-index:9999;}
 @keyframes float-up{0%{opacity:1;transform:translateY(0) scale(1);}100%{opacity:0;transform:translateY(-100px) scale(1.5);}}
 
-/* 🔧 MODIFIKASI: responsif mobile - padding tombol dikurangi */
 @media(max-width:600px){
   .container{padding:30px 20px;}
   .profile h1{font-size:28px;}
-  .link-btn{font-size:16px;padding:14px 22px;} /* ← DIKURANGI dari 16px ke 14px */
-  .photocard-track img {margin-right:15px;}
+  .link-btn{font-size:16px;padding:14px 22px;}
+  .photocard-item {margin-right:15px;}
 }
 </style>
 </head>
 <body>
   <div class="container">
-
-    <!-- ✅ Photocard -->
     <div class="photocard-container">
       <div class="photocard-track">
-        <img src="freya.jpg" alt="Freya">
-        <img src="michie.jpg" alt="Michie">
-        <img src="zee.jpg" alt="Zee">
-        <img src="nadine.jpg" alt="Nadine">
-        <img src="cristi.jpg" alt="Cristi">
+        <div class="photocard-item" data-index="0">
+          <img src="freya.jpg" class="front" alt="Freya">
+          <img src="freyas.jpg" class="back" alt="Freya Alt">
+        </div>
+        <div class="photocard-item" data-index="1">
+          <img src="michie.jpg" class="front" alt="Michie">
+          <img src="michies.jpg" class="back" alt="Michie Alt">
+        </div>
+        <div class="photocard-item" data-index="2">
+          <img src="zee.jpg" class="front" alt="Zee">
+          <img src="zees.jpg" class="back" alt="Zee Alt">
+        </div>
+        <div class="photocard-item" data-index="3">
+          <img src="nadine.jpg" class="front" alt="Nadine">
+          <img src="nadines.jpg" class="back" alt="Nadine Alt">
+        </div>
+        <div class="photocard-item" data-index="4">
+          <img src="cristi.jpg" class="front" alt="Cristi">
+          <img src="cristis.jpg" class="back" alt="Cristi Alt">
+        </div>
       </div>
     </div>
 
@@ -177,64 +168,23 @@ body::after {
     </div>
 
     <div class="links">
-        <!-- 🔥 1️⃣ Link Dosa pindah ke urutan pertama -->
         <div class="link-item">
-          <a href="galeri.html" target="_blank" class="link-btn link-dosa">
-            <svg class="link-icon" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"/>
-              <path d="M12 14.5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z" opacity="0.6"/>
-            </svg>
-            <span>Arsip Kumpulan Dosa</span>
-          </a>
+          <a href="galeri.html" target="_blank" class="link-btn link-dosa"><svg class="link-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M13.5.67s.74 2.65.74 4.8c0 2.06-1.35 3.73-3.41 3.73-2.07 0-3.63-1.67-3.63-3.73l.03-.36C5.21 7.51 4 10.62 4 14c0 4.42 3.58 8 8 8s8-3.58 8-8C20 8.61 17.41 3.8 13.5.67zM11.71 19c-1.78 0-3.22-1.4-3.22-3.14 0-1.62 1.05-2.76 2.81-3.12 1.77-.36 3.6-1.21 4.62-2.58.39 1.29.59 2.65.59 4.04 0 2.65-2.15 4.8-4.8 4.8z"/><path d="M12 14.5c-.83 0-1.5.67-1.5 1.5s.67 1.5 1.5 1.5 1.5-.67 1.5-1.5-.67-1.5-1.5-1.5z" opacity="0.6"/></svg><span>Arsip Kumpulan Dosa</span></a>
         </div>
-      
-        <!-- 2️⃣ Discord -->
         <div class="link-item">
-          <a href="https://discord.gg/x7XCsHnH" target="_blank" class="link-btn discord">
-            <svg class="link-icon" viewBox="0 0 127.14 96.36" fill="currentColor">
-              <path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/>
-            </svg>
-            <span>Join Discord Community</span>
-          </a>
+          <a href="https://discord.gg/x7XCsHnH" target="_blank" class="link-btn discord"><svg class="link-icon" viewBox="0 0 127.14 96.36" fill="currentColor"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg><span>Join Discord Community</span></a>
         </div>
-      
-        <!-- 3️⃣ Twitter -->
         <div class="link-item">
-          <a href="https://x.com/pejuhhhin?t=SjuJEosEhNuaIVrRUtII1g&s=09" target="_blank" class="link-btn twitter">
-            <svg class="link-icon" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
-            </svg>
-            <span>Follow Twitter/X</span>
-          </a>
+          <a href="https://x.com/pejuhhhin?t=SjuJEosEhNuaIVrRUtII1g&s=09" target="_blank" class="link-btn twitter"><svg class="link-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg><span>Follow Twitter/X</span></a>
         </div>
-      
-        <!-- 4️⃣ Free AI Bot (Link 1) -->
         <div class="link-item">
-          <a href="https://t.co/ugiVsDecMA" target="_blank" class="link-btn ai-bot1">
-            <svg class="link-icon" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5zm0 3.18l7 3.5v6.32c0 4.28-2.96 8.31-7 9.42-4.04-1.11-7-5.14-7-9.42V8.68l7-3.5z"/>
-              <path d="M9.5 14.5l-2-2L6 14l3.5 3.5L17 10l-1.5-1.5z" opacity="0.6"/>
-              <circle cx="12" cy="12" r="2.5" opacity="0.3"/>
-            </svg>
-            <span>Free A.I Bot (Link 1)</span>
-          </a>
+          <a href="https://t.co/ugiVsDecMA" target="_blank" class="link-btn ai-bot1"><svg class="link-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2L2 7v10c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V7l-10-5zm0 3.18l7 3.5v6.32c0 4.28-2.96 8.31-7 9.42-4.04-1.11-7-5.14-7-9.42V8.68l7-3.5z"/><path d="M9.5 14.5l-2-2L6 14l3.5 3.5L17 10l-1.5-1.5z" opacity="0.6"/><circle cx="12" cy="12" r="2.5" opacity="0.3"/></svg><span>Free A.I Bot (Link 1)</span></a>
         </div>
-      
-        <!-- 5️⃣ Free AI Bot (Link 2) -->
         <div class="link-item">
-          <a href="https://t.co/8cVxpJltdy" target="_blank" class="link-btn ai-bot2">
-            <svg class="link-icon" viewBox="0 0 24 24" fill="currentColor">
-              <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/>
-              <path d="M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z" opacity="0.6"/>
-              <circle cx="12" cy="12" r="2" opacity="0.4"/>
-              <path d="M12 8v4l3 1.5" opacity="0.5"/>
-            </svg>
-            <span>Free A.I Bot (Link 2)</span>
-          </a>
+          <a href="https://t.co/8cVxpJltdy" target="_blank" class="link-btn ai-bot2"><svg class="link-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 18c-4.41 0-8-3.59-8-8s3.59-8 8-8 8 3.59 8 8-3.59 8-8 8z"/><path d="M12 6c-3.31 0-6 2.69-6 6s2.69 6 6 6 6-2.69 6-6-2.69-6-6-6zm0 10c-2.21 0-4-1.79-4-4s1.79-4 4-4 4 1.79 4 4-1.79 4-4 4z" opacity="0.6"/><circle cx="12" cy="12" r="2" opacity="0.4"/><path d="M12 8v4l3 1.5" opacity="0.5"/></svg><span>Free A.I Bot (Link 2)</span></a>
         </div>
-      </div>
+    </div>
       
-
     <div class="footer">
       <p>© 2025 Luna Poca. All rights reserved.</p>
     </div>
@@ -254,14 +204,35 @@ document.querySelectorAll('.link-btn').forEach(btn=>{
   });
 });
 
-/* 🔁 Duplikasi otomatis photocard agar loop benar-benar mulus */
-(function initAutoScroll(){
-  const track = document.querySelector('.photocard-track');
-  if (!track) return;
-  track.innerHTML += track.innerHTML;
-  void track.offsetWidth; // paksa browser hitung ulang
-  track.style.animationPlayState = 'running';
+/* ✅ LOGIKA BARU: Pergantian Simultan (Bersamaan) */
+(function initSimultaneousSwitcher() {
+    const track = document.querySelector('.photocard-track');
+    if (!track) return;
+
+    // Duplikasi item untuk scroll yang mulus
+    track.innerHTML += track.innerHTML;
+
+    const allItems = track.querySelectorAll('.photocard-item');
+
+    // 🕒 Tunggu 2 detik dulu sebelum pergantian pertama
+    setTimeout(() => {
+        // 🔄 Lakukan pergantian pertama
+        allItems.forEach(item => item.classList.add('is-flipped'));
+        setTimeout(() => {
+            allItems.forEach(item => item.classList.remove('is-flipped'));
+        }, 2500);
+
+        // ⏱️ Setelah itu lanjut ke interval rutin tiap 5 detik
+        setInterval(() => {
+            allItems.forEach(item => item.classList.add('is-flipped'));
+            setTimeout(() => {
+                allItems.forEach(item => item.classList.remove('is-flipped'));
+            }, 2500);
+        }, 5000);
+    }, 2000); // ⬅️ Delay awal 2 detik sebelum mulai
 })();
+
+
 </script>
 </body>
 </html>
